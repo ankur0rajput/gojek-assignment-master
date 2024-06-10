@@ -4,7 +4,7 @@ from typing import Dict, List
 import numpy as np
 import pandas as pd
 from sklearn.base import BaseEstimator
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, roc_auc_score
 
 
 class Classifier(ABC):
@@ -34,8 +34,8 @@ class SklearnClassifier(Classifier):
 
     def evaluate(self, df_test: pd.DataFrame):
         prediction = self.clf.predict(df_test[self.features].values)
-        metric_name = 'accuracy_score'
-        metric_score = accuracy_score(df_test[self.target].values, prediction)
+        metric_name = 'roc_auc_score'
+        metric_score = roc_auc_score(df_test[self.target].values, prediction)
         return {metric_name: metric_score}
         '''
         raise NotImplementedError(

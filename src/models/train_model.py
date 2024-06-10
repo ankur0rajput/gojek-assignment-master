@@ -13,6 +13,7 @@ def main():
     config = load_config()
 
     df = store.get_processed("transformed_dataset.csv")
+    df = df[df['participant_status']!='CREATED']
     df_train, df_test = train_test_split(df, test_size=config["test_size"])
 
     rf_estimator = RandomForestClassifier(**config["random_forest"])
